@@ -29,6 +29,7 @@
                                 <th>Email</th>
                                 <th>Testimoni</th>
                                 <th>Tanggal Submit</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +39,26 @@
                                     <td>{{ $contact->email }}</td>
                                     <td>{{ $contact->testimoni }}</td>
                                     <td>{{ $contact->created_at->format('d M Y H:i') }}</td>
+                                    <td>
+                                        @php
+                                            $isPosted = \App\Models\Testimonial::where('nama', $contact->nama)
+                                                ->where('email', $contact->email)
+                                                ->where('testimoni', $contact->testimoni)
+                                                ->where('is_approved', true)
+                                                ->exists();
+                                        @endphp
+                                        @if(!$isPosted)
+                                            <form action="{{ route('admin.contact.postTestimoni', $contact->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success btn-sm">Post Testimoni</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('admin.contact.retractTestimoni', $contact->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-sm">Tarik Testimoni</button>
+                                            </form>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

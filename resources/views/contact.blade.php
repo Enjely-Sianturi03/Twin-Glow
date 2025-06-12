@@ -16,7 +16,7 @@
 
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-                    <form action="{{ route('testimonials.store') }}" method="POST">
+                    <form action="{{ route('contact.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>

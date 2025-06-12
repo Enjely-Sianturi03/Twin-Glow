@@ -17,7 +17,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         if (!Auth::check()) {
-            return redirect('/login')->with('message', 'You need to login to submit a testimonial.');
+            return redirect('/login')->with('message', 'Anda harus login terlebih dahulu untuk mengirim testimoni.');
         }
 
         // Validate only testimoni, karena nama & email dari Auth
@@ -35,7 +35,30 @@ class ContactController extends Controller
             'testimoni' => $validated['testimoni'],
         ]);
 
-        return redirect()->back()->with('success', 'Testimonial submitted successfully!');
+        return redirect()->back()->with('testimonial_success', 'Testimoni berhasil dikirim!');
+    }
+
+    public function postTestimoni($id)
+    {
+        $contact = \App\Models\Contact::findOrFail($id);
+        \App\Models\Testimonial::create([
+            'nama' => $contact->nama,
+            'email' => $contact->email,
+            'testimoni' => $contact->testimoni,
+            'is_approved' => true,
+        ]);
+        return redirect()->back()->with('testimonial_success', 'Testimoni berhasil diposting ke halaman utama!');
+    }
+
+    public function retractTestimoni($id)
+    {
+        $contact = \App\Models\Contact::findOrFail($id);
+        \App\Models\Testimonial::where('nama', $contact->nama)
+            ->where('email', $contact->email)
+            ->where('testimoni', $contact->testimoni)
+            ->where('is_approved', true)
+            ->delete();
+        return redirect()->back()->with('testimonial_success', 'Testimoni berhasil ditarik dari halaman utama!');
     }
 
 } 
