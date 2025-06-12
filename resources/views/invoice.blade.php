@@ -55,7 +55,7 @@
                             <div>
                                 <strong>Invoice Number:</strong> {{ $invoice->invoice_number }}<br>
                                 <strong>Issue Date:</strong> {{ Carbon\Carbon::parse($invoice->issue_date)->format('d F Y') }}<br>
-                                <strong>Due Date:</strong> {{ Carbon\Carbon::parse($invoice->due_date)->format('d F Y') }}<br>
+                                <strong>Due Date:</strong> {{ Carbon\Carbon::parse($invoice->booking->tanggal)->format('d F Y') }}<br>
                                 <strong>Status:</strong> 
                                 <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : 'warning' }}">
                                     {{ ucfirst($invoice->status) }}
@@ -118,5 +118,9 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Kembali ke Halaman Utama</a>
 </div>
 @endsection 

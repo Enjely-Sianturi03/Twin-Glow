@@ -26,6 +26,34 @@
         </div>
     </header>
 
+    <!-- Marquee berjalan seperti contoh -->
+    <div class="custom-marquee-bar" style="background:#f8e1ff; overflow:hidden; white-space:nowrap;">
+        <div class="custom-marquee-inner" style="display:flex; align-items:center; width:max-content;">
+            @for($i=0; $i<10; $i++)
+                <span style="color:#a020f0; font-weight:bold; font-size:1.1rem; margin-right:32px; display:inline-block;">
+                    Twin Glow Salon & Spa 😊 Salon dan Spa langganan mahasiswa/i favoritmu
+                </span>
+            @endfor
+        </div>
+    </div>
+    <script>
+        // Marquee berjalan seperti contoh
+        document.addEventListener('DOMContentLoaded', function() {
+            const marquee = document.querySelector('.custom-marquee-inner');
+            const bar = document.querySelector('.custom-marquee-bar');
+            if (marquee && bar) {
+                let pos = 0;
+                function animate() {
+                    pos -= 1;
+                    if (Math.abs(pos) >= marquee.offsetWidth/2) pos = 0;
+                    marquee.style.transform = `translateX(${pos}px)`;
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+        });
+    </script>
+
     <!-- Main Content -->
     <main>
         @yield('content')

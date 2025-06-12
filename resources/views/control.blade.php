@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ $booking->user->name ?? '-' }}</td>
                     <td>{{ $booking->user->email ?? '-' }}</td>
-                    <td>{{ $booking->service->name ?? '-' }}</td>
+                    <td>{{ $booking->service_id->name ?? '-' }}</td>
                     <td>{{ number_format($booking->service->price ?? 0) }}</td>
                     <td>{{ $booking->date }}</td>
                     <td>{{ $booking->time }}</td>

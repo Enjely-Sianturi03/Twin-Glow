@@ -7,60 +7,41 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Pembagian Tugas
+<ul>
+<li>Cindy Artika-241402012(FrontEnd)</li>
+<li>Rohaya Hasibuan-241402030(FrontEnd)</li>
+<li>Enjely Margaret Sianturi-241402046(BackEnd)</li>
+<li>Medeline Rovita Anggaraini Aritonang-241402063(BackEnd)</li>
+<li>Earlin Tasia Gulo-241402046(BackEnd)</li>
+</ul>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Deskripsi Web
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+TwinGlow Grooming Spa adalah aplikasi web pemesanan salon yang memungkinkan pengguna untuk melakukan booking layanan kecantikan dan perawatan dengan mudah dan cepat. Aplikasi ini melayani pria dan wanita dengan berbagai pilihan layanan, mulai dari perawatan rambut, wajah, hingga relaksasi spa.
+Pengguna dapat memilih jenis layanan yang diinginkan, serta menjadwalkan sesi perawatan sesuai ketersediaan waktu mereka. Dengan fitur transparansi harga, serta antarmuka yang ramah pengguna, TwinGlow Grooming Spa menghadirkan pengalaman pemesanan salon yang modern, praktis, dan nyaman bagi setiap pelanggan
 
-## Learning Laravel
+## Fitur Yang Tersedia
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<ul>
+<li>Fitur User : Login, Register, Booking layanan, Review, Galeri, Invoice, Lokasi, Info kontak & sosial media</li>
+<li>Fitur admin: Dashboard admin, Manajemen user, Manajemen Booking, Kelola testimoni, Statistik, Manajemen konten website(Galeri)</li>
+</ul>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Teknologi Yang Dipakai
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Laravel ver12**
+- **Laragon/Xampp**
+- **Vscode**
+- **PHP**, Minimal versi 8.2 
+- **Composer v2.8.6**
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Cara Menjalankan Aplikasi
+- Aktifkan MySQL di XAMPP/Laragon
+- buka terminal lalu ketikan "composer install" untuk menginstal package Laravel
+- kemudian ketikan juga di terminal "php artisan migrate" agar database terbuat
+- ketikan "php artisan serve" agar website dapat di akses di browser
+- ada 2 role yaitu admin dan user. Untuk masuk ke halaman admin membutuhkan akun dengan email:red@gmail.com dan sandi: 20202020
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

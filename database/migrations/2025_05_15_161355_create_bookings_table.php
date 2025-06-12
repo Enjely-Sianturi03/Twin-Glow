@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi ke users
+            // Jika kamu ingin hubungan dengan services, aktifkan baris di bawah:
+            // $table->foreignId('service_id')->nullable()->constrained()->onDelete('set null');
             $table->string('nama');
             $table->string('no_tlp');
             $table->string('email');
@@ -20,6 +23,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('waktu');
             $table->text('note')->nullable();
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }
