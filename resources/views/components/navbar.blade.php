@@ -4,6 +4,7 @@
         <li><a href="#services">Layanan</a></li>
         <li><a href="#booking">Booking</a></li>
         <li><a href="#gallery">Galeri</a></li>
+        <li><a href="#testimonials">Testimoni</a></li>
         <li><a href="#contact">Kontak</a></li>
         @guest
             <li><a href="{{ route('login') }}" class="nav-btn login">Login</a></li>

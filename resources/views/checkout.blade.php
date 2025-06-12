@@ -12,12 +12,19 @@
                     <div class="row">
                         <div class="col-md-4">
                             @php
-                                $serviceName = strtolower(str_replace(' ', '-', $booking->jenis_layanan));
-                                $serviceImage = "images/services/{$serviceName}.jpg";
-                                $defaultImage = 'images/default-service.jpg';
+                                $serviceImages = [
+                                    'facial' => 'facial treatment.jpg',
+                                    'haircut' => 'hairstyling.jpg',
+                                    'coloring' => 'haircolour.jpg',
+                                    'nails' => 'nailart.jpg',
+                                    'massage' => 'bodyMassage.jpg',
+                                    'makeup' => 'makeup profesional.jpg',
+                                ];
+                                $serviceKey = strtolower(str_replace([' ', '-'], '', $booking->jenis_layanan));
+                                $serviceImage = isset($serviceImages[$serviceKey]) ? 'image/' . $serviceImages[$serviceKey] : 'image/galeri1.jpg';
                             @endphp
                             <div class="service-image-container mb-3">
-                                <img src="{{ asset(file_exists(public_path($serviceImage)) ? $serviceImage : $defaultImage) }}" 
+                                <img src="{{ asset($serviceImage) }}" 
                                      alt="{{ $booking->jenis_layanan }}" 
                                      class="img-fluid rounded shadow-sm"
                                      style="width: 100%; height: 200px; object-fit: cover;">

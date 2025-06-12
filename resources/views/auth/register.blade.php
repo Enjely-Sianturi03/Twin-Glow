@@ -10,6 +10,7 @@
     <style>
         body {
             background-color: #f8f9fc;
+            background-image: url('/image/galeri1.jpg');
         }
         .register-container {
             min-height: 100vh;
@@ -17,6 +18,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem 0;
+            color: #231419;
         }
         .register-card {
             width: 100%;
@@ -42,6 +44,10 @@
             padding: 0.75rem;
             font-size: 1rem;
             font-weight: 500;
+            background-color:rgb(152, 92, 51);
+        }
+        .btn-brown:hover {
+         background-color:rgb(112, 64, 32); /* warna saat hover */
         }
     </style>
 </head>
