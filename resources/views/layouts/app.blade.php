@@ -20,7 +20,8 @@
             top: 80px;
             left: 0;
             width: 100%;
-            z-index: 99;
+            z-index: 999;
+
             background: rgba(255, 92, 166, 0.2);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -79,7 +80,6 @@
                 font-size: 1.1rem;
             }
         }
-
         main {
             position: relative;
             z-index: 100;
@@ -88,6 +88,7 @@
             padding-top: 20px;
             min-height: calc(100vh - 160px);
         }
+
     </style>
 </head>
 <body>
@@ -131,7 +132,7 @@
     </div>
 
     <!-- Main Content -->
-    <main>
+    <main style="margin-top: 40px;">
         @yield('content')
     </main>
 
