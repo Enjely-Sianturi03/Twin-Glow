@@ -23,6 +23,18 @@ class Booking extends Model
         'tanggal',
         'waktu',
         'note',
+        'status',
+        'user_id',
+        'service_id',
+    ];
+
+    /**
+     * Cast attributes to specific types.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'tanggal' => 'date',  
     ];
 
     public function user()
@@ -34,4 +46,6 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
-} 
+
+    
+}
