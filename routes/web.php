@@ -30,7 +30,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 
-
 // Contact/Testimonial Routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.form');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -57,13 +56,12 @@ Route::prefix('admin')->group(function () {
     Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
     
     // Protected admin routes
-  
     Route::middleware(['auth', 'admin'])->group(function () {
-    // Route::get('/', 'App\\Http\\Controllers\\Admin\\AdminController@dashboard')->name('admin.dashboard');
-   
+        // Tempat untuk routing admin protected jika perlu
     });
 });
 
+// Admin resource & CRUD routes
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('booking', BookingController::class);
@@ -74,25 +72,25 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/booking/{id}/edit', [BookingController::class, 'edit'])->name('booking.edit');
     Route::put('/booking/{id}', [BookingController::class, 'update'])->name('booking.update');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/users/{id}/toggle-block', [UserController::class, 'toggleBlock'])->name('users.toggleBlock'); // dari remote
+    Route::post('/contact/{id}/post-testimoni', [ContactController::class, 'postTestimoni'])->name('contact.postTestimoni');
+    Route::post('/contact/{id}/retract-testimoni', [ContactController::class, 'retractTestimoni'])->name('contact.retractTestimoni');
 });
 
+// Route tambahan (akses langsung)
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact.index');
 Route::post('/admin/users/{id}/toggle-block', [UserController::class, 'toggleBlock'])->name('admin.users.toggleBlock');
+
 
 Route::get('/admin', function () {
     $bookings = \App\Models\Booking::with(['user', 'service'])->latest()->get();
     return view('admin.dashboard', compact('bookings'));
 });
 
-Route::put('/admin/bookings/{id}/status', [DashboardController::class, 'updateStatus'])
-    ->name('admin.bookings.updateStatus');
-Route::get('admin/booking/{booking}/edit', [BookingController::class, 'edit'])->name('booking.edit');
+Route::put('/admin/bookings/{id}/status', [DashboardController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
+Route::get('/admin/booking/{booking}/edit', [BookingController::class, 'edit'])->name('booking.edit');
 Route::get('/admin/booking/create', [BookingController::class, 'create'])->name('admin.booking.create');
 Route::post('/admin/booking', [BookingController::class, 'store'])->name('admin.booking.store');
-
-Route::post('/admin/contact/{id}/post-testimoni', [ContactController::class, 'postTestimoni'])->name('admin.contact.postTestimoni');
-Route::post('/admin/contact/{id}/retract-testimoni', [ContactController::class, 'retractTestimoni'])->name('admin.contact.retractTestimoni');
-
-

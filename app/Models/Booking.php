@@ -9,9 +9,7 @@ use App\Models\Service;
 
 class Booking extends Model
 {
-    use SoftDeletes;
-
-    use HasFactory;
+    use SoftDeletes, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -50,6 +48,4 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
-
-    
 }
