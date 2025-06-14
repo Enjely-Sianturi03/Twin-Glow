@@ -32,9 +32,6 @@ Route::get('/booking/create', [BookingController::class, 'create'])->name('booki
 Route::get('admin/booking/riwayat', [BookingController::class, 'riwayat'])->name('admin.booking.riwayat');
 Route::delete('admin/booking/{id}', [BookingController::class, 'destroy'])->name('admin.booking.destroy');
 
-// =======
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
-
 // Contact/Testimonial Routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.form');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -68,14 +65,6 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-// =======
-//     Route::middleware(['auth', 'admin'])->group(function () {
-//         // Tempat untuk routing admin protected jika perlu
-//     });
-// });
-
-// // Admin resource & CRUD routes
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
 Route::prefix('admin')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('booking', BookingController::class);
@@ -92,21 +81,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('adm
 Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
 Route::post('/admin/users/{id}/toggle-block', [UserController::class, 'toggleBlock'])->name('admin.users.toggleBlock');
 Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact.index');
-// =======
-//     Route::get('/booking/riwayat', [BookingController::class, 'riwayat'])->name('booking.riwayat');
-//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-//     Route::post('/users/{id}/toggle-block', [UserController::class, 'toggleBlock'])->name('users.toggleBlock'); // dari remote
-//     Route::post('/contact/{id}/post-testimoni', [ContactController::class, 'postTestimoni'])->name('contact.postTestimoni');
-//     Route::post('/contact/{id}/retract-testimoni', [ContactController::class, 'retractTestimoni'])->name('contact.retractTestimoni');
-// });
-
-// // Route tambahan (akses langsung)
-// Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-// Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
-// Route::get('/admin/contact', [ContactController::class, 'index'])->name('admin.contact.index');
-// Route::post('/admin/users/{id}/toggle-block', [UserController::class, 'toggleBlock'])->name('admin.users.toggleBlock');
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
+Route::get('/booking/riwayat', [BookingController::class, 'riwayat'])->name('booking.riwayat');
 
 
 Route::get('/admin', function () {
@@ -122,11 +97,3 @@ Route::post('/admin/booking', [BookingController::class, 'store'])->name('admin.
 
 Route::post('/admin/contact/{id}/post-testimoni', [ContactController::class, 'postTestimoni'])->name('admin.contact.postTestimoni');
 Route::post('/admin/contact/{id}/retract-testimoni', [ContactController::class, 'retractTestimoni'])->name('admin.contact.retractTestimoni');
-
-
-// =======
-// Route::put('/admin/bookings/{id}/status', [DashboardController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
-// Route::get('/admin/booking/{booking}/edit', [BookingController::class, 'edit'])->name('booking.edit');
-// Route::get('/admin/booking/create', [BookingController::class, 'create'])->name('admin.booking.create');
-// Route::post('/admin/booking', [BookingController::class, 'store'])->name('admin.booking.store');
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5

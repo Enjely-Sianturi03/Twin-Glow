@@ -25,7 +25,6 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Booking Aktif</h6>
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -45,9 +44,7 @@
                 </thead>
                 <tbody>
                     @forelse($bookings as $booking)
-<!-- =======
-                    @forelse($bookingsAktif as $booking)
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
                     <tr>
                         <td>{{ $booking->id }}</td>
                         <td>{{ $booking->nama }}</td>
@@ -55,8 +52,7 @@
                         <td>
                             @php
                                 // Mapping harga manual jika tidak ada relasi service
-<!-- =======
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
                                 $prices = [
                                     'haircut' => 150000,
                                     'coloring' => 350000,
@@ -92,21 +88,13 @@
     <button type="submit" class="btn btn-danger btn-sm">Done</button>
 </form>
 
-<!-- =======
-                            <form action="{{ route('booking.destroy', $booking->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure to delete this booking?');">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-sm btn-danger" type="submit">Done</button>
-                            </form>
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
                         </td>
                     </tr>
                     @empty
                     <tr>
                         <td colspan="8" class="text-center">No bookings found.</td>
-<!-- =======
-                        <td colspan="9" class="text-center">No bookings found.</td>
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
                     </tr>
                     @endforelse
                 </tbody>
@@ -114,19 +102,14 @@
         </div>
     </div>
 </div>
-<!-- =======
-    </div>
-</div>
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
 @endsection
 
 @push('scripts')
 <script>
     $(document).ready(function() {
         $('#bookingTable').DataTable();
-// =======
-//         $('#historyTable').DataTable();
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
+
     });
 </script>
 @endpush

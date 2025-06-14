@@ -88,9 +88,7 @@
         </div>
     </div>
 
-<!-- =======
     <!-- Tabel Booking -->
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">All Bookings</h6>
@@ -157,9 +155,7 @@
                                 <div class="d-flex gap-2">
                                     @if($booking->status == 'pending')
                                     <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" >
-<!-- =======
-                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST">
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="confirmed">
@@ -168,9 +164,7 @@
                                         </button>
                                     </form>
                                     
-<!-- =======
 
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
                                     <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
@@ -202,8 +196,7 @@
                     </tbody>
                 </table>
                 {{-- Optional: Pagination --}}
-<!-- =======
->>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
+
                 {{-- {{ $bookings->links() }} --}}
             </div>
         </div>
