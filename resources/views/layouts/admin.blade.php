@@ -59,6 +59,10 @@
                         <a class="collapse-item" href="{{ route('admin.users') }}">User</a>
                         <a class="collapse-item" href="{{ route('admin.booking.index') }}">Booking</a>
                         <a class="collapse-item" href="{{ route('admin.contact.index') }}">Contact</a>
+<<<<<<< HEAD
+=======
+                        <a class="collapse-item" href="{{ route('booking.riwayat') }}">History</a>
+>>>>>>> 9a63313 (akses blokir user)
                     </div>
                 </div>
             </li>
