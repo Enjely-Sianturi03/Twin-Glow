@@ -73,6 +73,7 @@
                         </td>
                         <td>
                             <a href="{{ route('booking.edit', $booking->id) }}" class="btn btn-sm btn-info">Edit</a>
+
                             <form action="{{ route('booking.destroy', $booking->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure to delete this booking?');">
                                 @csrf
                                 @method('DELETE')
@@ -90,39 +91,6 @@
         </div>
     </div>
 </div>
-
-<!-- Riwayat Booking -->
-<div class="card shadow mb-4 mt-4">
-    <div class="card-header py-3 bg-secondary">
-        <h6 class="m-0 font-weight-bold text-white">Riwayat Booking (Sudah Selesai / Dihapus)</h6>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="historyTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Customer Name</th>
-                        <th>Service</th>
-                        <th>Deleted At</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($bookingRiwayat as $history)
-                    <tr>
-                        <td>{{ $history->id }}</td>
-                        <td>{{ $history->nama }}</td>
-                        <td>{{ $history->jenis_layanan }}</td>
-                        <td>{{ \Carbon\Carbon::parse($history->deleted_at)->format('d M Y H:i') }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="4" class="text-center">Tidak ada riwayat booking.</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
     </div>
 </div>
 @endsection
@@ -131,7 +99,7 @@
 <script>
     $(document).ready(function() {
         $('#bookingTable').DataTable();
-        $('#historyTable').DataTable(); // aktifkan datatable juga untuk riwayat
+        $('#historyTable').DataTable();
     });
 </script>
 @endpush
