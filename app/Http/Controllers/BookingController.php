@@ -10,9 +10,12 @@ use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-    /**
-     * Store a new booking.
-     */
+    public function index()
+    {
+        $bookings = Booking::all();
+        return view('admin.booking.index', compact('bookings'));
+    }
+
     public function store(Request $request)
     {
         // Check if user is logged in
@@ -20,36 +23,70 @@ class BookingController extends Controller
             return redirect('/login')->with('message', 'You need to login to book a service.');
         }
 
-        // Validasi dasar untuk booking
+        // Validation rules
         $validation = [
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'no_tlp' => 'required|string|max:20',
             'jenis_layanan' => 'required|string',
             'tanggal' => 'required|date_format:Y-m-d',
             'waktu' => 'required|string',
             'note' => 'nullable|string',
         ];
-        
-        // Tambahkan validasi no_tlp jika kolom tersedia di tabel users
+
+        // Add no_tlp validation if column exists
         if (Schema::hasColumn('users', 'no_tlp')) {
             $validation['no_tlp'] = 'required|string|max:20';
         }
-        
+
         $validated = $request->validate($validation);
 
-        // Create booking (jika no_tlp tidak ada di validasi, isi dengan string kosong)
+        // Create new booking
         $booking = new Booking();
         $booking->nama = $validated['nama'];
-        $booking->email = $validated['email']; 
+        $booking->email = $validated['email'];
         $booking->no_tlp = $validated['no_tlp'] ?? '';
         $booking->jenis_layanan = $validated['jenis_layanan'];
         $booking->tanggal = Carbon::parse($validated['tanggal'])->format('Y-m-d');
         $booking->waktu = $validated['waktu'];
         $booking->note = $validated['note'] ?? null;
-        $booking->user_id = Auth::id(); // Add user_id to the booking
+        $booking->user_id = Auth::id();  // pastikan kolom user_id ada di tabel bookings
+        $booking->status = 'pending';    // set default status
+
         $booking->save();
 
-        return redirect()->route('checkout.show', $booking)
+        // Redirect ke halaman checkout, ganti dengan route yang benar kalau perlu
+        return redirect()->route('checkout.show', $booking->id)
             ->with('success', 'Booking berhasil! Silakan lakukan pembayaran.');
     }
+
+    public function create()
+    {
+        return view('admin.booking.create'); 
+    }
+
+    public function edit(Booking $booking)
+    {
+        return view('admin.booking.edit', compact('booking'));
+    }
+
+    public function update(Request $request, Booking $booking)
+{
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'jenis_layanan' => 'required|string',
+        'tanggal' => 'required|date_format:Y-m-d',
+        'waktu' => 'required|string',
+        'note' => 'nullable|string',
+        'status' => 'required|in:pending,confirmed,cancelled',
+        // tambahkan validasi lain jika perlu
+    ]);
+
+    $booking->update($validated);
+
+    return redirect()->route('admin.booking.index')->with('success', 'Booking updated successfully.');
+}
+
+
 }

@@ -14,7 +14,7 @@
                         </div>
                         <div>
                             <h5 class="card-title mb-0">Total Bookings</h5>
-                            <h2 class="mb-0">{{ $bookings->count() }}</h2>
+                            <h2 class="mb-0">{{ $bookings ? $bookings->count() : 0 }}</h2>
                         </div>
                     </div>
                 </div>
@@ -66,6 +66,7 @@
             </div>
         </div>
     </div>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">All Bookings</h6>
@@ -83,29 +84,65 @@
                             <th>Time</th>
                             <th>Status</th>
                             <th>Created At</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($bookings as $booking)
                         <tr>
-                            <td>{{ $booking->user->name ?? '-' }}</td>
-                            <td>{{ $booking->user->email ?? '-' }}</td>
-                            <td>{{ $booking->service->name ?? '-' }}</td>
-                            <td>{{ number_format($booking->service->price ?? 0) }}</td>
-                            <td>{{ $booking->date }}</td>
-                            <td>{{ $booking->time }}</td>
+                            <td>{{ optional($booking->user)->name ?? '-' }}</td>
+                            <td>{{ optional($booking->user)->email ?? '-' }}</td>
+                            <td>{{ $booking->jenis_layanan ?? '-' }}</td>
                             <td>
-                                <span class="badge bg-{{ $booking->status == 'confirmed' ? 'success' : ($booking->status == 'pending' ? 'warning' : ($booking->status == 'cancelled' ? 'danger' : 'secondary')) }}">
-                                    {{ ucfirst($booking->status) }}
+                                @php
+                                    $prices = [
+                                        'haircut' => 150000,
+                                        'coloring' => 350000,
+                                        'facial' => 250000,
+                                        'nails' => 120000,
+                                        'massage' => 300000,
+                                        'makeup' => 400000,
+                                    ];
+                                    $price = optional($booking->service)->price ?? ($prices[strtolower($booking->jenis_layanan ?? '')] ?? 0);
+                                @endphp
+                                {{ $price ? 'Rp ' . number_format($price, 0, ',', '.') : '-' }}
+                            </td>
+                            <td>{{ optional($booking->tanggal)->format('d M Y') ?? '-' }}</td>
+                            <td>{{ $booking->waktu ?? '-' }}</td>
+                            <td>
+                                <span class="badge bg-{{ 
+                                    $booking->status == 'confirmed' ? 'success' : 
+                                    ($booking->status == 'pending' ? 'warning' : 
+                                    ($booking->status == 'cancelled' ? 'danger' : 'secondary')) 
+                                }}">
+                                    {{ ucfirst($booking->status ?? 'unknown') }}
                                 </span>
                             </td>
-                            <td>{{ $booking->created_at->format('d M Y H:i') }}</td>
+                            <td>{{ optional($booking->created_at)->format('d M Y H:i') ?? '-' }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" >
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="confirmed">
+                                        <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+                                    </form>
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="cancelled">
+                                        <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+                {{-- Optional: Pagination --}}
+                {{-- {{ $bookings->links() }} --}}
             </div>
         </div>
     </div>
 </div>
-@endsection 
+@endsection
