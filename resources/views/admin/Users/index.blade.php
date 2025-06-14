@@ -14,82 +14,72 @@
             <div class="table-responsive">
                 <table class="table table-bordered text-center" width="100%" cellspacing="0">
                     <thead class="table-dark">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>No Telepon</th>
-                            <th>Created At</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $index => $user)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->no_tlp ?? '-' }}</td>
-                            <td>{{ $user->created_at->format('d M Y H:i') }}</td>
-                            <td>
-                                <!-- Tombol Edit -->
-                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editUserModal{{ $user->id }}">
-                                    Edit
-                                </button>
+    <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Email</th>
+        <th>No Telepon</th>
+        <th>Created At</th>
+        <th>Aksi</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach ($users as $index => $user)
+    <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
+        <td>{{ $user->no_tlp ?? '-' }}</td>
+        <td>{{ $user->created_at->format('d M Y H:i') }}</td>
+        <td>
+<form action="{{ route('admin.users.toggleBlock', $user->id) }}" method="POST">
+    @csrf
+    <button type="submit" class="btn btn-warning">
+        {{ $user->is_blocked ? 'Unblock' : 'Block' }}
+    </button>
+</form>
 
-                                <!-- Tombol Hapus -->
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus pengguna ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
 
-                                <!-- Tombol Block / Unblock -->
-                                <form action="{{ route('admin.users.toggleBlock', $user->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-secondary">
-                                        {{ $user->is_blocked ? 'Unblock' : 'Block' }}
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+        </td>
+    </tr>
 
-                        <!-- Modal Edit -->
-                        <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1" aria-labelledby="editUserModalLabel{{ $user->id }}" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <form action="{{ route('users.update', $user->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Edit Pengguna</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span>&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>Nama</label>
-                                                <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>No Telepon</label>
-                                                <input type="text" name="no_tlp" class="form-control" value="{{ $user->no_tlp }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1" aria-labelledby="editUserModalLabel{{ $user->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('users.update', $user->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Pengguna</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="name" class="form-control" value="{{ $user->name }}" required>
                         </div>
-                        @endforeach
-                    </tbody>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>No Telepon</label>
+                            <input type="text" name="no_tlp" class="form-control" value="{{ $user->no_tlp }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    @endforeach
+</tbody>
+
                 </table>
             </div>
         </div>
