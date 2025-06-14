@@ -39,7 +39,9 @@
     </button>
 </form>
 
-
+<!-- =======
+        </td>
+>>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5 -->
     </tr>
 
     <!-- Modal Edit -->

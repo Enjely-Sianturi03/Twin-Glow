@@ -7,12 +7,21 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+
     // Tampilkan daftar booking
     public function index()
     {
         $bookings = Booking::orderBy('date', 'desc')->get();
         return view('booking.index', compact('bookings'));
     }
+
+// public function index()
+// {
+//     $bookingsAktif = Booking::orderBy('date', 'desc')->get(); // booking yang belum dihapus
+//     $bookingRiwayat = Booking::onlyTrashed()->orderBy('deleted_at', 'desc')->get(); // booking yang sudah soft deleted
+
+//     return view('booking.index', compact('bookingsAktif', 'bookingRiwayat'));
+// }
 
     // Tampilkan form tambah booking
     public function create()
