@@ -34,4 +34,4 @@ Pengguna dapat memilih jenis layanan yang diinginkan, serta menjadwalkan sesi pe
 - buka terminal lalu ketikan "composer install" untuk menginstal package Laravel
 - kemudian ketikan juga di terminal "php artisan migrate" agar database terbuat
 - ketikan "php artisan serve" agar website dapat di akses di browser
-- ada 2 role yaitu admin dan user. Untuk masuk ke halaman admin membutuhkan akun dengan email:red@gmail.com dan sandi: 20202020git
+- ada 2 role yaitu admin dan user. Untuk masuk ke halaman admin membutuhkan akun dengan email:red@gmail.com dan sandi: 20202020
