@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Service;
 
 class Booking extends Model
 {
+    use SoftDeletes;
+
     use HasFactory;
 
     /**
@@ -23,6 +26,19 @@ class Booking extends Model
         'tanggal',
         'waktu',
         'note',
+        'status',
+        'user_id',
+        'service_id',
+        'payment_method',
+    ];
+
+    /**
+     * Cast attributes to specific types.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'tanggal' => 'date',  
     ];
 
     public function user()
@@ -34,4 +50,6 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
-} 
+
+    
+}

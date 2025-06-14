@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login - Salon Admin</title>
+    <title>Login - Salon</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
+   <style>
         body {
-            background-color: #f8f9fc;
+            background-color:rgb(242, 150, 224);
+            background-image: url('/image/Gambar1.jpeg'); 
         }
         .login-container {
             min-height: 100vh;
@@ -41,6 +42,10 @@
             padding: 0.75rem;
             font-size: 1rem;
             font-weight: 500;
+            background: #f06292;
+        }
+        .btn-pink:hover {
+            background-color: #d63384;
         }
     </style>
 </head>
