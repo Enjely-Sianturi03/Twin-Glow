@@ -20,30 +20,37 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+public function login(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        $user = User::where('email', $credentials['email'])->first();
+    $user = User::where('email', $credentials['email'])->first();
 
-        if (!$user || !Hash::check($credentials['password'], $user->password)) {
-            return back()->withErrors([
-                'email' => 'Email atau password yang dimasukkan tidak sesuai.',
-            ])->onlyInput('email');
-        }
-
-        Auth::login($user);
-        $request->session()->regenerate();
-
-        if ($user->email === 'red@gmail.com') {
-            return redirect('/admin');
-        }
-
-        return redirect()->intended('/');
+    if (!$user || !Hash::check($credentials['password'], $user->password)) {
+        return back()->withErrors([
+            'email' => 'Email atau password yang dimasukkan tidak sesuai.',
+        ])->onlyInput('email');
     }
+
+    // 👉 Cek jika user diblokir
+    if ($user->is_blocked) {
+        return back()->withErrors([
+            'email' => 'Akun Anda telah diblokir oleh admin.',
+        ])->onlyInput('email');
+    }
+
+    Auth::login($user);
+    $request->session()->regenerate();
+
+    if ($user->email === 'red@gmail.com') {
+        return redirect('/admin');
+    }
+
+    return redirect()->intended('/');
+}
 
     public function logout(Request $request)
     {
