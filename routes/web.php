@@ -13,9 +13,6 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
-// =======
-// use App\Http\Controllers\HomeController;
-// >>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb
 use App\Models\Booking;
 
 // Main page
@@ -29,14 +26,14 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-// Booking Routes
+// // Booking Routes
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 
-// =======
-// Route::get('admin/booking/riwayat', [BookingController::class, 'riwayat'])->name('admin.booking.riwayat');
-// Route::delete('admin/booking/{id}', [BookingController::class, 'destroy'])->name('admin.booking.destroy');
-// >>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb
+
+Route::get('admin/booking/riwayat', [BookingController::class, 'riwayat'])->name('admin.booking.riwayat');
+Route::delete('admin/booking/{id}', [BookingController::class, 'destroy'])->name('admin.booking.destroy');
+
 
 // Contact/Testimonial Routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.form');

@@ -98,6 +98,7 @@ class BookingController extends Controller
             'note' => 'nullable|string',
         ]);
 
+        // Create new booking with user data
         $booking = new Booking();
         $booking->nama = $user->name; // Use logged in user's name
         $booking->email = $user->email; // Use logged in user's email
@@ -157,7 +158,7 @@ class BookingController extends Controller
         
         // Get operational hours for the selected day
         $operationalHours = OperationalHours::where('day', $dayName)->first();
-
+        
 
         if (!$operationalHours || !$operationalHours->is_open) {
             return back()->withErrors(['tanggal' => 'Salon tutup pada hari yang dipilih.'])->withInput();
@@ -222,5 +223,19 @@ class BookingController extends Controller
 
         return $days[$englishDay] ?? $englishDay;
     }
+
+    public function riwayat()
+{
+    $bookingRiwayat = Booking::onlyTrashed()->latest()->get();
+    return view('admin.riwayat.index', compact('bookingRiwayat'));
+}
+
+public function destroy($id)
+{
+    $booking = Booking::findOrFail($id);
+    $booking->delete(); // soft delete
+    return redirect()->route('admin.booking.index')->with('success', 'Booking dipindahkan ke riwayat.');
+}
+
 
 }
