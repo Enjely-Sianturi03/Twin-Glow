@@ -59,11 +59,8 @@
                         <a class="collapse-item" href="{{ route('admin.users') }}">User</a>
                         <a class="collapse-item" href="{{ route('admin.booking.index') }}">Booking</a>
                         <a class="collapse-item" href="{{ route('admin.contact.index') }}">Contact</a>
-<!-- =======
-
                         <a class="collapse-item" href="{{ route('admin.booking.riwayat') }}">History</a>
 
->>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb -->
                     </div>
                 </div>
             </li>
