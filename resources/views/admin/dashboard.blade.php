@@ -88,6 +88,7 @@
         </div>
     </div>
 
+    <!-- Tabel Booking -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">All Bookings</h6>
@@ -144,11 +145,17 @@
                                     <span class="badge bg-secondary">{{ ucfirst($booking->status) }}</span>
                                 @endif
                             </td>
+                            <td>
+                                <span class="badge {{ $booking->payment_method == 'transfer' ? 'bg-info' : 'bg-success' }}">
+                                    {{ ucfirst($booking->payment_method) }}
+                                </span>
+                            </td>
                             <td>{{ optional($booking->created_at)->format('d M Y H:i') ?? '-' }}</td>
                             <td>
                                 <div class="d-flex gap-2">
                                     @if($booking->status == 'pending')
                                     <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" >
+
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="confirmed">
@@ -157,6 +164,7 @@
                                         </button>
                                     </form>
                                     
+
                                     <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
@@ -183,7 +191,6 @@
                                     @endif
                                 </div>
                             </td>
-
                         </tr>
                         @endforeach
                     </tbody>
