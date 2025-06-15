@@ -20,13 +20,9 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('waktu');
             $table->text('note')->nullable();
-<<<<<<< HEAD:database/migrations/2025_05_15_161355_create_bookings_table.php
-            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
-=======
             $table->enum('status', ['pending', 'confirmed', 'cancelled', 'done'])->default('pending');
             $table->enum('payment_method', ['transfer', 'cash'])->default('cash');
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
->>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb:database/migrations/2024_01_15_create_bookings_table.php
             $table->timestamps();
         });
     }
