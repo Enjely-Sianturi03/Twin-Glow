@@ -10,9 +10,6 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi ke users
-            // Jika kamu ingin hubungan dengan services, aktifkan baris di bawah:
-            // $table->foreignId('service_id')->nullable()->constrained()->onDelete('set null');
             $table->string('nama');
             $table->string('no_tlp');
             $table->string('email');
@@ -31,5 +28,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('bookings');
     }
-};
-
+}; 
+// =======
+// };
+// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
