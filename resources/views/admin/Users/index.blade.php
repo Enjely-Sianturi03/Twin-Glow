@@ -32,25 +32,14 @@
         <td>{{ $user->no_tlp ?? '-' }}</td>
         <td>{{ $user->created_at->format('d M Y H:i') }}</td>
         <td>
-            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editUserModal{{ $user->id }}">
-                Edit
-            </button>
-            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus pengguna ini?')">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger btn-sm">Hapus</button>
-            </form>
-        </td>
-<!-- =======
 <form action="{{ route('admin.users.toggleBlock', $user->id) }}" method="POST">
     @csrf
     <button type="submit" class="btn btn-warning">
         {{ $user->is_blocked ? 'Unblock' : 'Block' }}
     </button>
 </form>
+        </td>
 
-
->>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb -->
     </tr>
 
     <!-- Modal Edit -->
