@@ -11,9 +11,6 @@ class Booking extends Model
 {
     use SoftDeletes;
     use HasFactory;
-// =======
-//     use SoftDeletes, HasFactory;
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
 
     /**
      * The attributes that are mass assignable.
@@ -32,9 +29,7 @@ class Booking extends Model
         'status',
         'user_id',
         'service_id',
-// =======
-//         'payment_method',
-// >>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb
+
     ];
 
     /**
@@ -55,9 +50,4 @@ class Booking extends Model
     {
         return $this->belongsTo(Service::class, 'service_id');
     }
-
-// =======
-// // =======
-// // >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
-// >>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb
 }
