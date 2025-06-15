@@ -32,5 +32,14 @@ class UserController extends Controller
         $user->delete();
         return redirect()->back()->with('success', 'Data pengguna berhasil dihapus');
     }
+
+        public function toggleBlock($id)
+{
+    $user = User::findOrFail($id);
+    $user->is_blocked = !$user->is_blocked; // toggle
+    $user->save();
+
+    return back()->with('success', 'Status user berhasil diubah.');
+}
 }
 
