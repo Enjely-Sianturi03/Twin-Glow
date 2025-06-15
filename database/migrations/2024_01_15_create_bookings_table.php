@@ -31,11 +31,5 @@ return new class extends Migration
     {
         Schema::dropIfExists('bookings');
     }
-<<<<<<< HEAD:database/migrations/2025_05_15_161355_create_bookings_table.php
 };
-=======
-}; 
-// =======
-// };
-// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
->>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb:database/migrations/2024_01_15_create_bookings_table.php
+
