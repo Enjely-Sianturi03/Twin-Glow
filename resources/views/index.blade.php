@@ -21,6 +21,28 @@
         </div>
     </section>
 
+    <!-- Beauty Articles Section -->
+    <section class="beauty-articles" id="beauty-articles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tips & Info Kecantikan</h2>
+            </div>
+            <div class="articles-grid">
+                @foreach($beautyArticles as $article)
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" style="width:100%; height:200px; object-fit:cover;">
+                        </div>
+                        <div class="article-content">
+                            <h3>{{ $article->title }}</h3>
+                            <a href="{{ $article->article_url }}" class="btn btn-article" target="_blank">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">

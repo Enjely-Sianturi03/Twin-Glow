@@ -65,6 +65,16 @@
             </select>
         </div>
 
+<!-- =======
+        <div class="form-group">
+            <label for="payment_method">Metode Pembayaran</label>
+            <select name="payment_method" id="payment_method" class="form-control" required>
+                <option value="cash" {{ old('payment_method', $booking->payment_method) == 'cash' ? 'selected' : '' }}>Cash</option>
+                <option value="transfer" {{ old('payment_method', $booking->payment_method) == 'transfer' ? 'selected' : '' }}>Transfer</option>
+            </select>
+        </div>
+
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb -->
         <button type="submit" class="btn btn-primary">Update Booking</button>
         <a href="{{ route('admin.booking.index') }}" class="btn btn-secondary">Kembali</a>
     </form>

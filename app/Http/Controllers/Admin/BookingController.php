@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    // Tampilkan daftar booking
     public function index()
     {
         $bookings = Booking::orderBy('date', 'desc')->get();
         return view('booking.index', compact('bookings'));
     }
+
 
     // Tampilkan form tambah booking
     public function create()

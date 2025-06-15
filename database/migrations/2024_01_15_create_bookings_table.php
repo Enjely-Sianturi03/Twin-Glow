@@ -6,10 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
@@ -23,16 +20,26 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('waktu');
             $table->text('note')->nullable();
+<<<<<<< HEAD:database/migrations/2025_05_15_161355_create_bookings_table.php
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+=======
+            $table->enum('status', ['pending', 'confirmed', 'cancelled', 'done'])->default('pending');
+            $table->enum('payment_method', ['transfer', 'cash'])->default('cash');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb:database/migrations/2024_01_15_create_bookings_table.php
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('bookings');
     }
+<<<<<<< HEAD:database/migrations/2025_05_15_161355_create_bookings_table.php
 };
+=======
+}; 
+// =======
+// };
+// >>>>>>> c6ea0260a8d50d634a3ad16d55310cda8cc865b5
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb:database/migrations/2024_01_15_create_bookings_table.php

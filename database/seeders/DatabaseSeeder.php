@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
             OperationalHoursSeeder::class,
+<<<<<<< HEAD
+=======
+            BeautyArticlesSeeder::class,
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb
         ]);
     }
 }

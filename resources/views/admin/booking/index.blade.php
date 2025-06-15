@@ -20,6 +20,9 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Booking List</h6>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Booking Aktif</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -46,6 +49,7 @@
                         <td>
                             @php
                                 // Mapping harga manual jika tidak ada relasi service
+
                                 $prices = [
                                     'haircut' => 150000,
                                     'coloring' => 350000,
@@ -80,11 +84,13 @@
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger" type="submit">Done</button>
                             </form>
+
                         </td>
                     </tr>
                     @empty
                     <tr>
                         <td colspan="8" class="text-center">No bookings found.</td>
+
                     </tr>
                     @endforelse
                 </tbody>
@@ -98,6 +104,7 @@
 <script>
     $(document).ready(function() {
         $('#bookingTable').DataTable();
+
     });
 </script>
 @endpush

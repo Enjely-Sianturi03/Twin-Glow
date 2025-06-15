@@ -19,6 +19,7 @@
     @endif
 
     <div class="row mb-4">
+        <!-- Total Bookings -->
         <div class="col-lg-3 col-6">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body">
@@ -34,6 +35,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Confirmed -->
         <div class="col-lg-3 col-6">
             <div class="card text-white bg-success mb-3">
                 <div class="card-body">
@@ -49,6 +52,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Pending -->
         <div class="col-lg-3 col-6">
             <div class="card text-white bg-warning mb-3">
                 <div class="card-body">
@@ -64,6 +69,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Cancelled -->
         <div class="col-lg-3 col-6">
             <div class="card text-white bg-danger mb-3">
                 <div class="card-body">
@@ -97,6 +104,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Status</th>
+                            <th>Payment</th>
                             <th>Created At</th>
                             <th>Actions</th>
                         </tr>
@@ -175,11 +183,13 @@
                                     @endif
                                 </div>
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
                 {{-- Optional: Pagination --}}
+
                 {{-- {{ $bookings->links() }} --}}
             </div>
         </div>

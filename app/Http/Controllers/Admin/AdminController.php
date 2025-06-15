@@ -53,4 +53,13 @@ class AdminController extends Controller
         Auth::logout();
         return redirect()->route('admin.login');
     }
+
+    public function toggleBlock(User $user)
+{
+    $user->is_blocked = !$user->is_blocked;
+    $user->save();
+
+    return back()->with('success', 'Status user berhasil diperbarui.');
+}
+
 } 

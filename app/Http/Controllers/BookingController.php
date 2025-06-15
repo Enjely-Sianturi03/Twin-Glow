@@ -15,11 +15,11 @@ class BookingController extends Controller
     {
         $bookings = Booking::all();
         return view('admin.booking.index', compact('bookings'));
+
     }
 
     public function store(Request $request)
     {
-        // Check if user is logged in
         if (!Auth::check()) {
             return redirect('/login')->with('message', 'You need to login to book a service.');
         }
@@ -99,7 +99,6 @@ class BookingController extends Controller
             'note' => 'nullable|string',
         ]);
 
-        // Create new booking with user data
         $booking = new Booking();
         $booking->nama = $user->name; // Use logged in user's name
         $booking->email = $user->email; // Use logged in user's email
@@ -121,6 +120,7 @@ class BookingController extends Controller
     {
         $operationalHours = OperationalHours::all();
         return view('admin.booking.create', compact('operationalHours')); 
+
     }
 
     public function edit(Booking $booking)
@@ -137,8 +137,7 @@ class BookingController extends Controller
         // Get the booking date and time
         $bookingDate = Carbon::parse($request->tanggal);
         $bookingTime = Carbon::parse($request->waktu);
-        
-        // Combine booking date and time
+
         $bookingDateTime = Carbon::create(
             $bookingDate->year,
             $bookingDate->month,
@@ -148,7 +147,7 @@ class BookingController extends Controller
             0
         );
 
-        // Check if booking time has passed
+
         if ($bookingDateTime->isPast()) {
             return back()->withErrors([
                 'waktu' => 'Tidak dapat melakukan booking untuk waktu yang sudah berlalu.'
@@ -160,7 +159,7 @@ class BookingController extends Controller
         
         // Get operational hours for the selected day
         $operationalHours = OperationalHours::where('day', $dayName)->first();
-        
+
         if (!$operationalHours || !$operationalHours->is_open) {
             return back()->withErrors(['tanggal' => 'Salon tutup pada hari yang dipilih.'])->withInput();
         }
@@ -169,14 +168,12 @@ class BookingController extends Controller
         $openTime = Carbon::parse($operationalHours->open_time);
         $closeTime = Carbon::parse($operationalHours->close_time);
 
-        // Check if booking time is within operational hours
         if ($bookingTime->lt($openTime) || $bookingTime->gt($closeTime)) {
             return back()->withErrors([
                 'waktu' => "Waktu booking harus antara {$openTime->format('H:i')} - {$closeTime->format('H:i')} pada hari {$dayName}."
             ])->withInput();
         }
 
-        // Check if booking time is on exact hour
         if ($bookingTime->format('i') !== '00') {
             return back()->withErrors([
                 'waktu' => "Waktu booking harus tepat pada jam (contoh: 10:00, 11:00)."
@@ -200,6 +197,7 @@ class BookingController extends Controller
                 'required',
                 'string',
                 'regex:/^([0-9]|0[0-9]|1[0-9]|2[0-3]):00$/' // Only allow exact hours
+
             ],
             'note' => 'nullable|string',
             'status' => 'required|in:pending,confirmed,cancelled',
@@ -225,4 +223,5 @@ class BookingController extends Controller
 
         return $days[$englishDay] ?? $englishDay;
     }
+
 }

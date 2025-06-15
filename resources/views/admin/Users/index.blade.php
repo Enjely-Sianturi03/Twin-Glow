@@ -41,6 +41,16 @@
                 <button class="btn btn-danger btn-sm">Hapus</button>
             </form>
         </td>
+<!-- =======
+<form action="{{ route('admin.users.toggleBlock', $user->id) }}" method="POST">
+    @csrf
+    <button type="submit" class="btn btn-warning">
+        {{ $user->is_blocked ? 'Unblock' : 'Block' }}
+    </button>
+</form>
+
+
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb -->
     </tr>
 
     <!-- Modal Edit -->

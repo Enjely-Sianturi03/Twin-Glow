@@ -54,6 +54,16 @@
             <textarea name="note" id="note" class="form-control">{{ old('note') }}</textarea>
         </div>
 
+<!-- =======
+        <div class="form-group">
+            <label for="payment_method">Metode Pembayaran</label>
+            <select name="payment_method" id="payment_method" class="form-control" required>
+                <option value="cash" {{ old('payment_method') == 'cash' ? 'selected' : '' }}>Cash</option>
+                <option value="transfer" {{ old('payment_method') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+            </select>
+        </div>
+
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb -->
         <button type="submit" class="btn btn-primary">Simpan Booking</button>
     </form>
 </div>

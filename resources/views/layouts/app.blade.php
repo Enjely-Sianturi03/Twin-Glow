@@ -20,6 +20,7 @@
             top: 80px;
             left: 0;
             width: 100%;
+
             z-index: 999;
             background: rgba(255, 92, 166, 0.2);
             backdrop-filter: blur(8px);
@@ -79,6 +80,17 @@
                 font-size: 1.1rem;
             }
         }
+/* =======
+
+        main {
+            position: relative;
+            z-index: 100;
+            margin-top: 160px;
+            background: white;
+            padding-top: 20px;
+            min-height: calc(100vh - 160px);
+        }
+>>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb */
     </style>
 </head>
 <body>
@@ -142,4 +154,4 @@
     <!-- Custom JS -->
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
-</html> 
+</html>
