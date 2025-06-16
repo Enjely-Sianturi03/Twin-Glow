@@ -22,6 +22,7 @@
             position: relative;
             width: 100%;
             z-index: 50;
+
             background: rgba(255, 92, 166, 0.2);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -39,7 +40,10 @@
             display: inline-flex;
             align-items: center;
             animation: marquee 30s linear infinite;
+<<<<<<< HEAD
             padding-left: 100%;
+=======
+>>>>>>> 3799c54a3c97b35b2f9da2befb533d90b73f1992
         }
 
         .custom-marquee-item {
@@ -64,12 +68,20 @@
         }
 
         @keyframes marquee {
+<<<<<<< HEAD
             0% { transform: translateX(0); }
+=======
+            0% { transform: translateX(100%); }
+>>>>>>> 3799c54a3c97b35b2f9da2befb533d90b73f1992
             100% { transform: translateX(-100%); }
         }
 
         @media (max-width: 768px) {
             .custom-marquee-container {
+<<<<<<< HEAD
+=======
+                top: 70px;
+>>>>>>> 3799c54a3c97b35b2f9da2befb533d90b73f1992
                 background: rgba(255, 92, 166, 0.25);
             }
             .custom-marquee-item {
@@ -80,6 +92,7 @@
                 font-size: 1.1rem;
             }
         }
+<<<<<<< HEAD
 
         header {
             position: relative;
@@ -135,6 +148,17 @@
         .swal2-success-fix {
             background-color: transparent !important;
         }
+=======
+        main {
+            position: relative;
+            z-index: 100;
+            margin-top: 160px;
+            background: white;
+            padding-top: 20px;
+            min-height: calc(100vh - 160px);
+        }
+
+>>>>>>> 3799c54a3c97b35b2f9da2befb533d90b73f1992
     </style>
 </head>
 <body>
@@ -177,8 +201,36 @@
         </div>
     </header>
 
+    <!-- Marquee berjalan yang unik -->
+    <div class="custom-marquee-container">
+        <div class="custom-marquee-bar">
+            <div class="custom-marquee-inner">
+                <span class="custom-marquee-item">
+                    <i class="fas fa-star"></i>
+                    Twin Glow Salon & Spa 😊 Salon dan Spa langganan mahasiswa/i favoritmu
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-gift"></i>
+                    Dapatkan Diskon 20% untuk Booking Online!
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-clock"></i>
+                    Buka Setiap Hari - Senin-Jumat: 09:00-19:00, Sabtu: 09:00-18:00, Minggu: 10:00-16:00
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-phone"></i>
+                    Hubungi Kami: +62 812-3456-789
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Jl. Dr.Manshyur No. 224, Padang Bulan, Medan
+                </span>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <main>
+    <main style="margin-top: 40px;">
         @yield('content')
     </main>
 
@@ -197,6 +249,7 @@
 
     <!-- Custom JS -->
     <script src="{{ asset('js/main.js') }}"></script>
+<<<<<<< HEAD
 
     <!-- Add SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -253,5 +306,7 @@
             });
         @endif
     </script>
+=======
+>>>>>>> 3799c54a3c97b35b2f9da2befb533d90b73f1992
 </body>
 </html> 

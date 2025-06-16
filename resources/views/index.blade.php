@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <!-- Hero Section -->
     <section class="hero">
@@ -30,6 +31,7 @@
                     </div>
                 @endforeach
             </div>
+
         </div>
     </section>
 
@@ -195,7 +197,7 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
-                                    <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+                                    <input type="date" id="tanggal" name="tanggal" class="form-control" required min="{{ date('Y-m-d') }}">
                                     @error('tanggal')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
@@ -211,6 +213,7 @@
                                         <span class="error">{{ $message }}</span>
                                     @enderror
                                     <small class="form-text text-muted">Waktu booking harus minimal 1 jam dari waktu sekarang.</small>
+
                                 </div>
                             </div>
                         </div>
@@ -371,6 +374,7 @@
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->name }}" readonly style="background-color: #f8f9fa; cursor: not-allowed;">
+
                                     @error('nama')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
@@ -378,6 +382,7 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly style="background-color: #f8f9fa; cursor: not-allowed;">
+
                                     @error('email')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
@@ -385,6 +390,7 @@
                                 <div class="form-group">
                                     <label for="testimoni">Testimoni Anda</label>
                                     <textarea id="testimoni" name="testimoni" class="form-control" rows="4" required>{{ old('testimoni') }}</textarea>
+
                                     @error('testimoni')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
@@ -395,6 +401,7 @@
                                         Kirim Testimoni
                                     </button>
                                 </div>
+
                             </form>
                         @endguest
                     </div>
@@ -429,6 +436,7 @@
 
 @push('scripts')
 <script src="{{ asset('js/booking-validation.js') }}"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const operationalHours = {

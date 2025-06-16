@@ -24,16 +24,19 @@
         <div class="form-group">
             <label for="nama">Nama Customer</label>
             <input type="text" name="nama" value="{{ old('nama', $booking->nama) }}" class="form-control" readonly>
+
         </div>
 
         <div class="form-group">
             <label for="no_tlp">No. Telepon</label>
             <input type="text" name="no_tlp" value="{{ old('no_tlp', $booking->no_tlp) }}" class="form-control" readonly>
+
         </div>
 
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" value="{{ old('email', $booking->email) }}" class="form-control" readonly>
+
         </div>
 
         <div class="form-group">
@@ -49,11 +52,13 @@
         <div class="form-group">
             <label for="waktu">Waktu</label>
             <input type="time" name="waktu" value="{{ old('waktu', $booking->waktu) }}" class="form-control" required>
+
         </div>
 
         <div class="form-group">
             <label for="note">Catatan</label>
             <textarea name="note" class="form-control" readonly>{{ old('note', $booking->note) }}</textarea>
+
         </div>
 
         <div class="form-group">
@@ -66,6 +71,7 @@
             <label for="payment_method">Metode Pembayaran</label>
             <input type="text" class="form-control" value="{{ $booking->payment_method }}" readonly>
             <input type="hidden" name="payment_method" value="{{ $booking->payment_method }}">
+
         </div>
 
         <button type="submit" class="btn btn-primary">Update Booking</button>

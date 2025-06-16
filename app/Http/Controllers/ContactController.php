@@ -10,13 +10,12 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::latest()->get(); 
+        $contacts = Contact::latest()->paginate(10); 
         return view('admin.contact.index', compact('contacts'));
     }
 
     public function store(Request $request)
     {
-        // Check if user is logged in
         if (!Auth::check()) {
             return redirect('/login')->with('message', 'Anda harus login terlebih dahulu untuk mengirim testimoni.');
         }

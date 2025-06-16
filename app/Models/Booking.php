@@ -27,6 +27,7 @@ class Booking extends Model
         'user_id',
         'service_id',
         'payment_method',
+
     ];
 
     /**

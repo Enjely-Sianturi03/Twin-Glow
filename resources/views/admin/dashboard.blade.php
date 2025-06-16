@@ -180,6 +180,7 @@
                                     @endif
                                 </div>
                             </td>
+
                         </tr>
                         @endforeach
                     </tbody>
@@ -191,3 +192,4 @@
     </div>
 </div>
 @endsection
+

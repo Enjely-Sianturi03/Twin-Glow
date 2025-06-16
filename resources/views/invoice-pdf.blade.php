@@ -26,6 +26,7 @@
 <body>
     <h1>Invoice PDF</h1>
     <p>Ini adalah template invoice PDF dummy. Silakan sesuaikan sesuai kebutuhan.</p>
+
     <div class="header">
         <span class="title">Invoice</span>
     </div>
@@ -59,6 +60,7 @@
             <strong>Status:</strong>
             <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : ($invoice->status === 'done' ? 'secondary' : 'warning') }}">
                 {{ $invoice->status === 'sent' ? 'Done' : ucfirst($invoice->status) }}
+
             </span>
         </div>
     </div>
@@ -98,6 +100,7 @@
                 <strong>Account Name:</strong> Twin Glow Salon Padang Bulan</p>
             @endif
             <p><strong>Order Date:</strong> {{ $invoice->created_at ? Carbon::parse($invoice->created_at)->setTimezone('Asia/Jakarta')->format('d F Y H:i') : 'N/A' }}</p>
+
         </div>
     </div>
 </body>

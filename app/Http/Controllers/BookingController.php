@@ -116,6 +116,9 @@ class BookingController extends Controller
         $booking->nama = $user->name;
         $booking->email = $user->email;
         $booking->no_tlp = $user->no_tlp;
+        $booking->nama = $user->name; // Use logged in user's name
+        $booking->email = $user->email; // Use logged in user's email
+        $booking->no_tlp = $user->no_tlp; 
         $booking->jenis_layanan = $validated['jenis_layanan'];
         $booking->tanggal = Carbon::parse($validated['tanggal'])->format('Y-m-d');
         $booking->waktu = $validated['waktu'];
@@ -200,8 +203,12 @@ class BookingController extends Controller
             ])->withInput();
         }
 
-        // Only validate editable fields
+
+
         $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+
             'jenis_layanan' => 'required|string',
             'tanggal' => [
                 'required',
@@ -225,6 +232,7 @@ class BookingController extends Controller
             'tanggal' => Carbon::parse($validated['tanggal'])->format('Y-m-d'),
             'waktu' => $validated['waktu']
         ]);
+
 
         return redirect()->route('admin.booking.index')
             ->with('booking_success', 'Booking berhasil diperbarui.');
