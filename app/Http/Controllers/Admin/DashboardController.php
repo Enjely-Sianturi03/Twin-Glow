@@ -45,16 +45,46 @@ class DashboardController extends Controller
     // Mengubah status booking (dipanggil dari tombol Confirm/Done/Cancel)
     public function updateStatus(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|in:pending,confirmed,done,cancelled'
-        ]);
+        try {
+            $request->validate([
+                'status' => 'required|in:pending,confirmed,done,cancelled'
+            ]);
 
-        $booking = Booking::findOrFail($id);
-        $booking->status = (string) $request->input('status');
+            $booking = Booking::findOrFail($id);
+            
+            // If status is set to done
+            if ($request->input('status') === 'done') {
+                // Check if booking is still pending
+                if ($booking->status === 'pending') {
+                    return redirect()->back()
+                        ->with('error', 'Tidak dapat menyelesaikan booking yang masih pending. Harap konfirmasi booking terlebih dahulu.');
+                }
+                
+                // If confirmed, proceed with deletion
+                if ($booking->status === 'confirmed') {
+                    $booking->delete();
+                    return redirect()->back()
+                        ->with('success', 'Booking telah selesai dan dihapus dari sistem.');
+                }
+            }
 
-        $booking->save();
+            // For other status updates
+            $booking->status = (string) $request->input('status');
+            $booking->save();
 
-        return redirect()->back()->with('success', 'Booking status updated successfully.');
+            $statusMessages = [
+                'confirmed' => 'Booking telah dikonfirmasi.',
+                'cancelled' => 'Booking telah dibatalkan.',
+                'pending' => 'Status booking diubah menjadi pending.'
+            ];
+
+            return redirect()->back()
+                ->with('success', $statusMessages[$booking->status] ?? 'Status booking berhasil diperbarui.');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Terjadi kesalahan saat memperbarui status booking. Silakan coba lagi.');
+        }
     }
 
     public function dashboard()

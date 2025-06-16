@@ -6,16 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relasi ke users
-            // Jika kamu ingin hubungan dengan services, aktifkan baris di bawah:
-            // $table->foreignId('service_id')->nullable()->constrained()->onDelete('set null');
             $table->string('nama');
             $table->string('no_tlp');
             $table->string('email');
@@ -23,16 +17,15 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('waktu');
             $table->text('note')->nullable();
-            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+            $table->enum('status', ['pending', 'confirmed', 'cancelled', 'done'])->default('pending');
+            $table->enum('payment_method', ['transfer', 'cash'])->default('cash');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('bookings');
     }
-};
+}; 

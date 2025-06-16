@@ -1,23 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use App\Models\Booking;
 
 // Main page
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Authentication Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -60,7 +59,7 @@ Route::prefix('admin')->group(function () {
     // Protected admin routes
   
     Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', 'App\Http\Controllers\Admin\AdminController@dashboard')->name('admin.dashboard');
+    // Route::get('/', 'App\\Http\\Controllers\\Admin\\AdminController@dashboard')->name('admin.dashboard');
    
     });
 });
@@ -92,5 +91,8 @@ Route::put('/admin/bookings/{id}/status', [DashboardController::class, 'updateSt
 Route::get('admin/booking/{booking}/edit', [BookingController::class, 'edit'])->name('booking.edit');
 Route::get('/admin/booking/create', [BookingController::class, 'create'])->name('admin.booking.create');
 Route::post('/admin/booking', [BookingController::class, 'store'])->name('admin.booking.store');
+
+Route::post('/admin/contact/{id}/post-testimoni', [ContactController::class, 'postTestimoni'])->name('admin.contact.postTestimoni');
+Route::post('/admin/contact/{id}/retract-testimoni', [ContactController::class, 'retractTestimoni'])->name('admin.contact.retractTestimoni');
 
 
