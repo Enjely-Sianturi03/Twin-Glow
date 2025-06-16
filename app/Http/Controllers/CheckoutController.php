@@ -38,6 +38,9 @@ class CheckoutController extends Controller
             'status' => 'pending',
             'payment_date' => $now,
         ]);
+        // Update booking payment_method
+        $booking->payment_method = $request->payment_method;
+        $booking->save();
 
         // Create invoice
         $invoice = Invoice::create([

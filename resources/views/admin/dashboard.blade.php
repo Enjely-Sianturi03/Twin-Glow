@@ -4,6 +4,20 @@
 
 @section('content')
 <div class="container-fluid py-4">
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="row mb-4">
         <div class="col-lg-3 col-6">
             <div class="card text-white bg-primary mb-3">
@@ -83,6 +97,7 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Status</th>
+                            <th>Payment</th>
                             <th>Created At</th>
                             <th>Actions</th>
                         </tr>
@@ -110,29 +125,59 @@
                             <td>{{ optional($booking->tanggal)->format('d M Y') ?? '-' }}</td>
                             <td>{{ $booking->waktu ?? '-' }}</td>
                             <td>
-                                <span class="badge bg-{{ 
-                                    $booking->status == 'confirmed' ? 'success' : 
-                                    ($booking->status == 'pending' ? 'warning' : 
-                                    ($booking->status == 'cancelled' ? 'danger' : 'secondary')) 
-                                }}">
-                                    {{ ucfirst($booking->status ?? 'unknown') }}
+                                @if($booking->status == 'pending')
+                                    <span class="badge bg-warning">Pending</span>
+                                @elseif($booking->status == 'confirmed')
+                                    <span class="badge bg-success">Confirmed</span>
+                                @elseif($booking->status == 'cancelled')
+                                    <span class="badge bg-danger">Cancelled</span>
+                                @elseif($booking->status == 'done')
+                                    <span class="badge bg-primary">Done</span>
+                                @else
+                                    <span class="badge bg-secondary">{{ ucfirst($booking->status) }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                <span class="badge {{ $booking->payment_method == 'transfer' ? 'bg-info' : 'bg-success' }}">
+                                    {{ ucfirst($booking->payment_method) }}
                                 </span>
                             </td>
-                            <td>{{ optional($booking->created_at)->format('d M Y H:i') ?? '-' }}</td>
+                            <td>{{ optional($booking->created_at) ? optional($booking->created_at)->setTimezone('Asia/Jakarta')->format('d M Y H:i') : '-' }}</td>
                             <td>
-                                <div class="d-flex gap-2">
-                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" >
+                                <div class="d-flex flex-column gap-2">
+                                    @if($booking->status == 'pending')
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="mb-1">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="confirmed">
-                                        <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+                                        <button type="submit" class="btn btn-sm btn-success" title="Konfirmasi booking">
+                                            <i class="fas fa-check"></i> Confirm
+                                        </button>
                                     </form>
-                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST">
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="mb-1">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="cancelled">
-                                        <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Batalkan booking">
+                                            <i class="fas fa-times"></i> Cancel
+                                        </button>
                                     </form>
+                                    @endif
+
+                                    @if($booking->status == 'confirmed')
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="mb-1">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="done">
+                                        <button type="submit" class="btn btn-sm btn-primary" title="Selesaikan booking">
+                                            <i class="fas fa-check-double"></i> Done
+                                        </button>
+                                    </form>
+                                    @endif
+
+                                    @if($booking->status == 'cancelled')
+                                    <span class="badge bg-secondary">Dibatalkan</span>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

@@ -55,10 +55,10 @@
                             <div>
                                 <strong>Invoice Number:</strong> {{ $invoice->invoice_number }}<br>
                                 <strong>Issue Date:</strong> {{ Carbon\Carbon::parse($invoice->issue_date)->format('d F Y') }}<br>
-                                <strong>Due Date:</strong> {{ Carbon\Carbon::parse($invoice->due_date)->format('d F Y') }}<br>
+                                <strong>Due Date:</strong> {{ Carbon\Carbon::parse($invoice->booking->tanggal)->format('d F Y') }}<br>
                                 <strong>Status:</strong> 
-                                <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : 'warning' }}">
-                                    {{ ucfirst($invoice->status) }}
+                                <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : ($invoice->status === 'done' ? 'secondary' : 'warning') }}">
+                                    {{ $invoice->status === 'sent' ? 'Done' : ucfirst($invoice->status) }}
                                 </span>
                             </div>
                         </div>
@@ -109,8 +109,8 @@
                                 </div>
                             @endif
                             <p class="mb-0">
-                                <strong>Payment Date:</strong> 
-                                {{ $invoice->payment->payment_date ? Carbon\Carbon::parse($invoice->payment->payment_date)->format('d F Y H:i') : 'N/A' }}
+                                <strong>Order Date:</strong> 
+                                {{ $invoice->created_at ? Carbon\Carbon::parse($invoice->created_at)->setTimezone('Asia/Jakarta')->format('d F Y H:i') : 'N/A' }}
                             </p>
                         </div>
                     </div>
@@ -118,5 +118,9 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Kembali ke Halaman Utama</a>
 </div>
 @endsection 
