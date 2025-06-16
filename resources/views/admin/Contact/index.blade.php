@@ -14,6 +14,14 @@
             </button>
         </div>
     @endif
+    @if(session('testimonial_success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('testimonial_success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -21,32 +29,47 @@
         </div>
         <div class="card-body">
             @if($contacts->count())
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead>
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Testimoni</th>
+                            <th>Tanggal Submit</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($contacts as $contact)
                             <tr>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Testimoni</th>
-                                <th>Tanggal Submit</th>
+                                <td>{{ $contact->nama }}</td>
+                                <td>{{ $contact->email }}</td>
+                                <td>{{ $contact->testimoni }}</td>
+                                <td>{{ $contact->created_at->format('d M Y H:i') }}</td>
+                                <td>
+                                    @php
+                                        $isPosted = \App\Models\Testimonial::where('nama', $contact->nama)
+                                            ->where('email', $contact->email)
+                                            ->where('testimoni', $contact->testimoni)
+                                            ->where('is_approved', true)
+                                            ->exists();
+                                    @endphp
+                                    @if(!$isPosted)
+                                        <form action="{{ route('admin.contact.postTestimoni', $contact->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success btn-sm">Post Testimoni</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('admin.contact.retractTestimoni', $contact->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger btn-sm">Tarik Testimoni</button>
+                                        </form>
+                                    @endif
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($contacts as $contact)
-                                <tr>
-                                    <td>{{ $contact->nama }}</td>
-                                    <td>{{ $contact->email }}</td>
-                                    <td>{{ $contact->testimoni }}</td>
-                                    <td>{{ $contact->created_at->format('d M Y H:i') }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                
-                {{-- Pagination links --}}
-                {{ $contacts->links() }}
-
+                        @endforeach
+                    </tbody>
+                </table>
             @else
                 <p>Tidak ada testimoni yang ditemukan.</p>
             @endif
