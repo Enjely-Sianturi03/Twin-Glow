@@ -1,6 +1,7 @@
 <nav>
     <ul id="mainMenu">
         <li><a href="#home">Beranda</a></li>
+        <li><a href="#beauty-articles">Tips & Info</a></li>
         <li><a href="#services">Layanan</a></li>
         <li><a href="#booking">Booking</a></li>
         <li><a href="#gallery">Galeri</a></li>

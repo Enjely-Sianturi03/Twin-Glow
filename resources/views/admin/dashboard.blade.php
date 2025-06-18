@@ -150,6 +150,44 @@
                                     {{ ucfirst($booking->payment_method) }}
                                 </span>
                             </td>
+                            <td>{{ optional($booking->created_at) ? optional($booking->created_at)->setTimezone('Asia/Jakarta')->format('d M Y H:i') : '-' }}</td>
+                            <td>
+                                <div class="d-flex flex-column gap-2">
+                                    @if($booking->status == 'pending')
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="mb-1">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="confirmed">
+                                        <button type="submit" class="btn btn-sm btn-success" title="Konfirmasi booking">
+                                            <i class="fas fa-check"></i> Confirm
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="mb-1">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="cancelled">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Batalkan booking">
+                                            <i class="fas fa-times"></i> Cancel
+                                        </button>
+                                    </form>
+                                    @endif
+
+                                    @if($booking->status == 'confirmed')
+                                    <form action="{{ route('admin.bookings.updateStatus', $booking->id) }}" method="POST" class="mb-1">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="done">
+                                        <button type="submit" class="btn btn-sm btn-primary" title="Selesaikan booking">
+                                            <i class="fas fa-check-double"></i> Done
+                                        </button>
+                                    </form>
+                                    @endif
+
+                                    @if($booking->status == 'cancelled')
+                                    <span class="badge bg-secondary">Dibatalkan</span>
+                                    @endif
+                                </div>
+                            </td>
                             <td>{{ optional($booking->created_at)->format('d M Y H:i') ?? '-' }}</td>
                             <td>
                                 <div class="d-flex gap-2">

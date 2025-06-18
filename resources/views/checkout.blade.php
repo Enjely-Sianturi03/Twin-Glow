@@ -31,7 +31,7 @@
                                 <div class="service-name-overlay">
                                     <span class="badge bg-primary">{{ $booking->jenis_layanan }}</span>
                                 </div>
-                            </div>
+                            <!-- </div> bla -->
                         </div>
                         <div class="col-md-8">
                             <h5 class="border-bottom pb-2">Booking Details</h5>

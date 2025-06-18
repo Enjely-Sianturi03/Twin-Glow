@@ -19,6 +19,12 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+        // Check if user is admin (red@gmail.com)
+        if (Auth::check() && Auth::user()->email === 'red@gmail.com') {
+            abort(403, 'Akses ditolak. Admin tidak diperbolehkan melakukan booking.');
+        }
+
+        // Check if user is logged in
         if (!Auth::check()) {
             return redirect('/login')->with('message', 'You need to login to book a service.');
         }
@@ -42,6 +48,13 @@ class BookingController extends Controller
             $bookingTime->minute,
             0
         );
+
+        // Check if booking time is at least 1 hour from now (use full datetime comparison)
+        if ($bookingDateTime->lessThanOrEqualTo($now->copy()->addHour())) {
+            return back()->withErrors([
+                'waktu' => 'Waktu booking harus minimal 1 jam dari waktu sekarang.'
+            ])->withInput();
+        }
 
         // Check if booking time has passed
         if ($bookingDateTime->isPast()) {
@@ -100,9 +113,10 @@ class BookingController extends Controller
 
         // Create new booking with user data
         $booking = new Booking();
-        $booking->nama = $user->name; // Use logged in user's name
-        $booking->email = $user->email; // Use logged in user's email
-        $booking->no_tlp = $user->no_tlp; // Use logged in user's phone
+        $booking->nama = $user->name;
+        $booking->email = $user->email;
+        $booking->no_tlp = $user->no_tlp;
+
         $booking->jenis_layanan = $validated['jenis_layanan'];
         $booking->tanggal = Carbon::parse($validated['tanggal'])->format('Y-m-d');
         $booking->waktu = $validated['waktu'];
@@ -118,6 +132,11 @@ class BookingController extends Controller
 
     public function create()
     {
+        // Check if user is admin (red@gmail.com)
+        if (Auth::check() && Auth::user()->email === 'red@gmail.com') {
+            abort(403, 'Akses ditolak. Admin tidak diperbolehkan melakukan booking.');
+        }
+
         $operationalHours = OperationalHours::all();
         return view('admin.booking.create', compact('operationalHours')); 
 
@@ -180,9 +199,8 @@ class BookingController extends Controller
             ])->withInput();
         }
 
+        // Only validate editable fields
         $validated = $request->validate([
-            'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
             'jenis_layanan' => 'required|string',
             'tanggal' => [
                 'required',
@@ -199,11 +217,14 @@ class BookingController extends Controller
                 'regex:/^([0-9]|0[0-9]|1[0-9]|2[0-3]):00$/' // Only allow exact hours
 
             ],
-            'note' => 'nullable|string',
-            'status' => 'required|in:pending,confirmed,cancelled',
         ]);
 
-        $booking->update($validated);
+        // Only update editable fields
+        $booking->update([
+            'jenis_layanan' => $validated['jenis_layanan'],
+            'tanggal' => Carbon::parse($validated['tanggal'])->format('Y-m-d'),
+            'waktu' => $validated['waktu']
+        ]);
 
         return redirect()->route('admin.booking.index')
             ->with('booking_success', 'Booking berhasil diperbarui.');

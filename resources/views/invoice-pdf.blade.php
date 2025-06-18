@@ -24,6 +24,8 @@
     </style>
 </head>
 <body>
+    <h1>Invoice PDF</h1>
+    <p>Ini adalah template invoice PDF dummy. Silakan sesuaikan sesuai kebutuhan.</p>
     <div class="header">
         <span class="title">Invoice</span>
     </div>
@@ -55,8 +57,8 @@
             <strong>Issue Date:</strong> {{ Carbon::parse($invoice->issue_date)->format('d F Y') }}<br>
             <strong>Due Date:</strong> {{ Carbon::parse($invoice->booking->tanggal)->format('d F Y') }}<br>
             <strong>Status:</strong>
-            <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : 'warning' }}">
-                {{ ucfirst($invoice->status) }}
+            <span class="badge bg-{{ $invoice->status === 'paid' ? 'success' : ($invoice->status === 'done' ? 'secondary' : 'warning') }}">
+                {{ $invoice->status === 'sent' ? 'Done' : ucfirst($invoice->status) }}
             </span>
         </div>
     </div>
@@ -95,7 +97,8 @@
                 <strong>Account Number:</strong> 17283947261<br>
                 <strong>Account Name:</strong> Twin Glow Salon Padang Bulan</p>
             @endif
-            <p><strong>Payment Date:</strong> {{ $invoice->payment->payment_date ? Carbon::parse($invoice->payment->payment_date)->format('d F Y H:i') : 'N/A' }}</p>
+            <p><strong>Order Date:</strong> {{ $invoice->created_at ? Carbon::parse($invoice->created_at)->setTimezone('Asia/Jakarta')->format('d F Y H:i') : 'N/A' }}</p>
+
         </div>
     </div>
 </body>

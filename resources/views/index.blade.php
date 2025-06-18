@@ -1,23 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">Twin<span>Glow</span></a>
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <x-navbar></x-navbar>
-        </div>
-    </header>
-
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="hero-content">
-            <h1>Temukan Kecantikan Sejatimu</h1>
-            <p>Twin Glow menawarkan layanan kecantikan premium dengan harga terjangkau. Jadwalkan kunjungan Anda sekarang!</p>
-            <a href="#booking" class="btn">Booking Sekarang</a>
+            <h1>Temukan Kecantikan<span>Sejatimu</span></h1>
+            <p>Twin Glow menawarkan layanan kecantikan premium dengan harga terjangkau.<br>
+               Jadwalkan kunjungan Anda sekarang!</p>
+            <a href="{{ route('booking.create') }}" class="btn-booking">Booking Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Beauty Articles Section -->
+    <section class="beauty-articles" id="beauty-articles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tips & Info Kecantikan</h2>
+            </div>
+            <div class="articles-grid">
+                @foreach($beautyArticles as $article)
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="{{ $article->thumbnail_url }}" alt="{{ $article->title }}" style="width:100%; height:200px; object-fit:cover;">
+                        </div>
+                        <div class="article-content">
+                            <h3>{{ $article->title }}</h3>
+                            <a href="{{ $article->article_url }}" class="btn btn-article" target="_blank">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
 
@@ -220,7 +232,7 @@
                                     @error('waktu')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
-                                    <small class="form-text text-muted" id="operationalHours"></small>
+                                    <small class="form-text text-muted">Waktu booking harus minimal 1 jam dari waktu sekarang.</small>
                                 </div>
                             </div>
                         </div>
@@ -371,41 +383,42 @@
                 </div>
                 <div class="col-md-6">
                     <div class="contact-form">
-                        @if(session('testimonial_success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('testimonial_success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif
                         @guest
                             <div class="login-required-message">
                                 <p>Silakan <a href="{{ route('login') }}">login</a> terlebih dahulu untuk mengirim testimoni.</p>
                             </div>
                         @else
-                            <form id="contactForm" action="{{ route('contact.store') }}" method="POST">
+                            <form action="{{ route('contact.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->name }}" required>
+                                    <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->name }}" readonly style="background-color: #f8f9fa; cursor: not-allowed;">
+
                                     @error('nama')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" required>
+                                    <input type="email" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly style="background-color: #f8f9fa; cursor: not-allowed;">
                                     @error('email')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="testimoni">Testimoni</label>
-                                    <textarea id="testimoni" name="testimoni" class="form-control" rows="4" required></textarea>
+                                    <label for="testimoni">Testimoni Anda</label>
+                                    <textarea id="testimoni" name="testimoni" class="form-control" rows="4" required>{{ old('testimoni') }}</textarea>
+
                                     @error('testimoni')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">Kirim</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        Kirim Testimoni
+                                    </button>
+                                </div>
                             </form>
                         @endguest
                     </div>
@@ -439,6 +452,7 @@
 @endpush
 
 @push('scripts')
+<script src="{{ asset('js/booking-validation.js') }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const operationalHours = {

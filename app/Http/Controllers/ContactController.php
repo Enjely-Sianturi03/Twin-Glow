@@ -20,6 +20,11 @@ class ContactController extends Controller
             return redirect('/login')->with('message', 'Anda harus login terlebih dahulu untuk mengirim testimoni.');
         }
 
+        // Check if user is admin
+        if (Auth::user()->email === 'red@gmail.com') {
+            abort(403, 'Admin tidak diperbolehkan mengirim testimoni.');
+        }
+
         // Validate only testimoni, karena nama & email dari Auth
         $validated = $request->validate([
             'testimoni' => 'required|string',

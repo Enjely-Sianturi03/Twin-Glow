@@ -62,8 +62,11 @@
                 <option value="transfer" {{ old('payment_method') == 'transfer' ? 'selected' : '' }}>Transfer</option>
             </select>
         </div>
+<<<<<<< HEAD
 
 >>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb -->
+=======
+>>>>>>> medeleine
         <button type="submit" class="btn btn-primary">Simpan Booking</button>
     </form>
 </div>
