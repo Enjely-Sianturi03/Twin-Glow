@@ -177,8 +177,36 @@
         </div>
     </header>
 
+    <!-- Marquee berjalan yang unik -->
+    <div class="custom-marquee-container">
+        <div class="custom-marquee-bar">
+            <div class="custom-marquee-inner">
+                <span class="custom-marquee-item">
+                    <i class="fas fa-star"></i>
+                    Twin Glow Salon & Spa 😊 Salon dan Spa langganan mahasiswa/i favoritmu
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-gift"></i>
+                    Dapatkan Diskon 20% untuk Booking Online!
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-clock"></i>
+                    Buka Setiap Hari - Senin-Jumat: 09:00-19:00, Sabtu: 09:00-18:00, Minggu: 10:00-16:00
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-phone"></i>
+                    Hubungi Kami: +62 812-3456-789
+                </span>
+                <span class="custom-marquee-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Jl. Dr.Manshyur No. 224, Padang Bulan, Medan
+                </span>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <main>
+    <main style="margin-top: 40px;">
         @yield('content')
     </main>
 

@@ -4,7 +4,7 @@
 <div class="container py-5 mt-5">
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <h2 class="text-center mb-4">Hubungi Kami</h2>
+            <h class="text-center mb-4">Hubungi Kami</h3>
             
             @if(session('testimonial_success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,6 +20,15 @@
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle me-2"></i>
                             Silakan <a href="{{ route('login') }}">login</a> terlebih dahulu untuk mengirim testimoni.
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" 
+                                   id="nama" name="nama" value="{{ old('nama') }}" required>
+                            @error('nama')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     @else
                         <form action="{{ route('contact.store') }}" method="POST">

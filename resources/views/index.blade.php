@@ -195,7 +195,7 @@
                             <div class="form-column">
                                 <div class="form-group">
                                     <label for="tanggal">Tanggal</label>
-                                    <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+                                    <input type="date" id="tanggal" name="tanggal" class="form-control" required min="{{ date('Y-m-d') }}">
                                     @error('tanggal')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
@@ -371,6 +371,7 @@
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <input type="text" id="nama" name="nama" class="form-control" value="{{ Auth::user()->name }}" readonly style="background-color: #f8f9fa; cursor: not-allowed;">
+
                                     @error('nama')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
@@ -385,6 +386,7 @@
                                 <div class="form-group">
                                     <label for="testimoni">Testimoni Anda</label>
                                     <textarea id="testimoni" name="testimoni" class="form-control" rows="4" required>{{ old('testimoni') }}</textarea>
+
                                     @error('testimoni')
                                         <span class="error">{{ $message }}</span>
                                     @enderror

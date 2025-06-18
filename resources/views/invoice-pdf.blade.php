@@ -98,6 +98,7 @@
                 <strong>Account Name:</strong> Twin Glow Salon Padang Bulan</p>
             @endif
             <p><strong>Order Date:</strong> {{ $invoice->created_at ? Carbon::parse($invoice->created_at)->setTimezone('Asia/Jakarta')->format('d F Y H:i') : 'N/A' }}</p>
+
         </div>
     </div>
 </body>

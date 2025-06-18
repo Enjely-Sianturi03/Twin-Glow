@@ -116,6 +116,7 @@ class BookingController extends Controller
         $booking->nama = $user->name;
         $booking->email = $user->email;
         $booking->no_tlp = $user->no_tlp;
+
         $booking->jenis_layanan = $validated['jenis_layanan'];
         $booking->tanggal = Carbon::parse($validated['tanggal'])->format('Y-m-d');
         $booking->waktu = $validated['waktu'];

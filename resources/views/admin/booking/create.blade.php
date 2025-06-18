@@ -61,7 +61,6 @@
                 <option value="transfer" {{ old('payment_method') == 'transfer' ? 'selected' : '' }}>Transfer</option>
             </select>
         </div>
-
         <button type="submit" class="btn btn-primary">Simpan Booking</button>
     </form>
 </div>
