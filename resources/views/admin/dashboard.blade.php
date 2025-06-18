@@ -188,7 +188,7 @@
                                     @endif
                                 </div>
                             </td>
-                            <td>{{ optional($booking->created_at)->format('d M Y H:i') ?? '-' }}</td>
+                            <!-- <td>{{ optional($booking->created_at)->format('d M Y H:i') ?? '-' }}</td>
                             <td>
                                 <div class="d-flex gap-2">
                                     @if($booking->status == 'pending')
@@ -228,7 +228,7 @@
                                     <span class="badge bg-secondary">Dibatalkan</span>
                                     @endif
                                 </div>
-                            </td>
+                            </td> -->
                         </tr>
                         @endforeach
                     </tbody>

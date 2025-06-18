@@ -13,7 +13,6 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\HomeController;
 use App\Models\Booking;
 
 // Main page

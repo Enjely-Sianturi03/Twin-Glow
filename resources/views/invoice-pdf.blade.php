@@ -25,7 +25,6 @@
 </head>
 <body>
     <h1>Invoice PDF</h1>
-    <p>Ini adalah template invoice PDF dummy. Silakan sesuaikan sesuai kebutuhan.</p>
     <div class="header">
         <span class="title">Invoice</span>
     </div>
