@@ -18,16 +18,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <style>
-        .custom-marquee-container {
-            position: relative;
-            width: 100%;
-            z-index: 999;
-            background: rgba(255, 92, 166, 0.2);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 10px 0;
-            box-shadow: 0 2px 10px rgba(255, 92, 166, 0.15);
-        }
+.custom-marquee-container {
+    position: relative; /* penting agar z-index aktif */
+    z-index: 9999; /* lebih tinggi dari header */
+    width: 100%;
+    background: rgba(255, 92, 166, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(255, 92, 166, 0.15);
+}
+
 
         .custom-marquee-bar {
             overflow: hidden;
@@ -81,13 +82,15 @@
             }
         }
 
-        header {
-            position: relative;
-            width: 100%;
-            z-index: 40;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+header {
+    position: sticky; /* This is the key property */
+    top: 0; /* This makes it stick to the very top of the viewport */
+    z-index: 1000; /* Ensures it stays above other content */
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
 
         main {
             position: relative;
@@ -136,6 +139,7 @@
         .swal2-success-fix {
             background-color: transparent !important;
         }
+
     </style>
 </head>
 <body>
@@ -169,15 +173,20 @@
     </div>
 
     <!-- Header -->
-    <header>
-        <div class="container header-container">
+<header>
+    <div class="container header-container py-3">
+        <div class="d-flex justify-content-between align-items-center">
             <a href="/" class="logo">Twin<span>Glow</span></a>
             <button class="mobile-toggle" id="mobileToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <x-navbar></x-navbar>
         </div>
-    </header>
+        <div class="navbar-wrapper mt-2">
+            <x-navbar />
+        </div>
+    </div>
+</header>
+
 
     <!-- Main Content -->
     <main>
@@ -253,6 +262,15 @@
                 }
             });
         @endif
+
+        window.addEventListener('scroll', function() {
+    const header = document.getElementById('mainHeader');
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
     </script>
 
 </body>

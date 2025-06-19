@@ -22,6 +22,7 @@
                             <th>Layanan</th>
                             <th>Tanggal</th>
                             <th>Waktu</th>
+                            <th>Status</th> 
                             <th>Diselesaikan Pada</th>
                         </tr>
                     </thead>
@@ -33,21 +34,30 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->no_tlp }}</td>
                             <td>{{ $item->jenis_layanan }}</td>
-                            <td>{{ $item->tanggal }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
                             <td>{{ $item->waktu }}</td>
+                            <td>
+                                @if($item->status == 'pending')
+                                    <span class="badge badge-warning">Pending</span>
+                                @elseif($item->status == 'confirmed')
+                                    <span class="badge badge-success">Confirmed</span>
+                                @elseif($item->status == 'cancelled')
+                                    <span class="badge badge-danger">Cancelled</span>
+                                @else
+                                    <span class="badge badge-secondary">{{ ucfirst($item->status) }}</span>
+                                @endif
+                            </td>
                             <td>{{ \Carbon\Carbon::parse($item->deleted_at)->format('d M Y H:i') }}</td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="8">Belum ada data riwayat booking.</td>
+                            <td colspan="9">Belum ada data riwayat booking.</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>
 @endsection
-

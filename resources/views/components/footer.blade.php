@@ -14,7 +14,7 @@
                 <div class="footer-section">
                     <h3>Link Cepat</h3>
                     <ul>
-                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#beranda">Beranda</a></li>
                         <li><a href="#services">Layanan</a></li>
                         <li><a href="#booking">Booking</a></li>
                         <li><a href="#gallery">Galeri</a></li>

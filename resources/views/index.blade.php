@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="beranda">
         <div class="hero-content">
             <h1>Temukan Kecantikan<span>Sejatimu</span></h1>
             <p>Twin Glow menawarkan layanan kecantikan premium dengan harga terjangkau.<br>

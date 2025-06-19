@@ -1,6 +1,6 @@
-<nav>
+<nav class="navbar-custom">
     <ul id="mainMenu">
-        <li><a href="#home">Beranda</a></li>
+        <li><a href="#beranda">Beranda</a></li>
         <li><a href="#beauty-articles">Tips & Info</a></li>
         <li><a href="#services">Layanan</a></li>
         <li><a href="#booking">Booking</a></li>
