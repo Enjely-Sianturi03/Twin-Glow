@@ -29,6 +29,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 // // Booking Routes
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
 
 Route::get('admin/booking/riwayat', [BookingController::class, 'riwayat'])->name('admin.booking.riwayat');

@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function index()
-    {
-        $bookings = Booking::orderBy('date', 'desc')->get();
-        return view('booking.index', compact('bookings'));
+
+public function index(Request $request)
+{
+    $query = Booking::query();
+
+    if ($request->filled('tanggal')) {
+        $query->whereDate('tanggal', $request->tanggal);
     }
 
+    $bookings = $query->orderBy('tanggal', 'desc')->get();
+
+    return view('booking.index', compact('bookings'));
+}
 
     // Tampilkan form tambah booking
     public function create()

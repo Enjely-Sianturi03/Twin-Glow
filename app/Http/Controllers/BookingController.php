@@ -11,11 +11,24 @@ use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-    public function index()
-    {
-        $bookings = Booking::all();
-        return view('admin.booking.index', compact('bookings'));
+public function index(Request $request)
+{
+    // Ambil input tanggal dari form pencarian
+    $tanggal = $request->input('tanggal');
+
+    // Jika ada input tanggal, filter berdasarkan tanggal
+    if ($tanggal) {
+        $bookings = Booking::whereDate('tanggal', $tanggal)
+            ->orderBy('tanggal', 'desc')
+            ->get();
+    } else {
+        // Kalau tidak ada pencarian, ambil semua data booking
+        $bookings = Booking::orderBy('tanggal', 'desc')->get();
     }
+
+    return view('admin.booking.index', compact('bookings'));
+}
+
 
     public function store(Request $request)
     {

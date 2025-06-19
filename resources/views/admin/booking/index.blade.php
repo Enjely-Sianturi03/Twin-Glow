@@ -18,8 +18,16 @@
 
 <!-- Booking Table -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h6 class="m-0 font-weight-bold text-primary">Booking List</h6>
+        
+        <!-- Search Form -->
+        <form action="{{ route('booking.index') }}" method="GET" class="d-flex">
+            <input type="date" name="tanggal" class="form-control form-control-sm me-2" value="{{ request('tanggal') }}">
+            <button type="submit" class="btn btn-sm btn-primary">Cari</button>
+        </form>
+    </div>
+
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">
