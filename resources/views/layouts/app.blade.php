@@ -14,7 +14,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Add SweetAlert2 CSS -->
+    <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     <style>
@@ -80,19 +80,6 @@
                 font-size: 1.1rem;
             }
         }
-<<<<<<< HEAD
-/* =======
-
-        main {
-            position: relative;
-            z-index: 100;
-            margin-top: 160px;
-            background: white;
-            padding-top: 20px;
-            min-height: calc(100vh - 160px);
-        }
->>>>>>> fffb39338c68f80768a0eb6627658f0545b222cb */
-=======
 
         header {
             position: relative;
@@ -105,6 +92,7 @@
         main {
             position: relative;
             z-index: 30;
+            margin-top: 0px;
         }
 
         .animated {
@@ -148,10 +136,10 @@
         .swal2-success-fix {
             background-color: transparent !important;
         }
->>>>>>> medeleine
     </style>
 </head>
 <body>
+
     <!-- Marquee berjalan yang unik -->
     <div class="custom-marquee-container">
         <div class="custom-marquee-bar">
@@ -191,36 +179,8 @@
         </div>
     </header>
 
-    <!-- Marquee berjalan yang unik -->
-    <div class="custom-marquee-container">
-        <div class="custom-marquee-bar">
-            <div class="custom-marquee-inner">
-                <span class="custom-marquee-item">
-                    <i class="fas fa-star"></i>
-                    Twin Glow Salon & Spa 😊 Salon dan Spa langganan mahasiswa/i favoritmu
-                </span>
-                <span class="custom-marquee-item">
-                    <i class="fas fa-gift"></i>
-                    Dapatkan Diskon 20% untuk Booking Online!
-                </span>
-                <span class="custom-marquee-item">
-                    <i class="fas fa-clock"></i>
-                    Buka Setiap Hari - Senin-Jumat: 09:00-19:00, Sabtu: 09:00-18:00, Minggu: 10:00-16:00
-                </span>
-                <span class="custom-marquee-item">
-                    <i class="fas fa-phone"></i>
-                    Hubungi Kami: +62 812-3456-789
-                </span>
-                <span class="custom-marquee-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Jl. Dr.Manshyur No. 224, Padang Bulan, Medan
-                </span>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
-    <main style="margin-top: 40px;">
+    <main>
         @yield('content')
     </main>
 
@@ -233,14 +193,14 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Custom Scripts -->
     @stack('scripts')
 
     <!-- Custom JS -->
     <script src="{{ asset('js/main.js') }}"></script>
 
-    <!-- Add SweetAlert2 JS -->
+    <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if(session('testimonial_success'))
@@ -260,11 +220,10 @@
 
     <script>
         // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
+        document.getElementById('mobileToggle').addEventListener('click', function () {
             document.querySelector('nav').classList.toggle('active');
         });
 
-        // Display SweetAlert notifications if there are any flash messages
         @if(session('success'))
             Swal.fire({
                 icon: 'success',
@@ -295,5 +254,6 @@
             });
         @endif
     </script>
+
 </body>
 </html>
