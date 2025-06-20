@@ -211,7 +211,7 @@
                                     @error('waktu')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
-                                    <small class="form-text text-muted">Waktu booking harus minimal 1 jam dari waktu sekarang.</small>
+                                    <small class="form-text text-muted">Waktu booking harus minimal 1 jam sebelum waktu sekarang.</small>
                                 </div>
                             </div>
                         </div>
