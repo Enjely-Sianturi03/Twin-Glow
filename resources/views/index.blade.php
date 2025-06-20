@@ -450,45 +450,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const operationalHoursText = document.getElementById('operationalHours');
 
     function generateTimeOptions(openTime, closeTime, selectedDate) {
-        // Clear existing options
-        waktuInput.innerHTML = '<option value="">Pilih Waktu</option>';
-        
-        // Convert times to hours
-        const start = parseInt(openTime.split(':')[0]);
-        const end = parseInt(closeTime.split(':')[0]);
-        
-        // Get current date and time
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const selectedDateTime = new Date(selectedDate);
-        
-        // Check if selected date is today
-        const isToday = today.getTime() === selectedDateTime.getTime();
-        const currentHour = now.getHours();
-        
-        // Generate options for each hour
-        for (let hour = start; hour <= end; hour++) {
-            // Skip past hours if it's today
-            if (isToday && hour <= currentHour) {
-                continue;
-            }
-            
-            const timeString = hour.toString().padStart(2, '0') + ':00';
-            const option = document.createElement('option');
-            option.value = timeString;
-            option.textContent = timeString;
-            waktuInput.appendChild(option);
+    // Clear existing options
+    waktuInput.innerHTML = '<option value="">Pilih Waktu</option>';
+
+    // Convert open/close time to integer hours
+    const startHour = parseInt(openTime.split(':')[0]);
+    const endHour = parseInt(closeTime.split(':')[0]);
+
+    // Get current date and time
+    const now = new Date();
+    const currentTime = now.getTime();
+
+    // Convert selected date to Date object
+    const selectedDateObj = new Date(selectedDate);
+    const isToday = selectedDateObj.toDateString() === now.toDateString();
+
+    for (let hour = startHour; hour <= endHour; hour++) {
+        const bookingDateTime = new Date(selectedDate);
+        bookingDateTime.setHours(hour, 0, 0, 0);
+
+        // Hitung selisih waktu dalam menit
+        const diffInMs = bookingDateTime.getTime() - currentTime;
+        const diffInMinutes = diffInMs / (1000 * 60);
+
+        // Kalau hari ini dan waktunya kurang dari 60 menit dari sekarang, skip
+        if (isToday && diffInMinutes < 60) {
+            continue;
         }
 
-        // If no options were added (all times have passed), show message
-        if (waktuInput.options.length === 1) {
-            const option = document.createElement('option');
-            option.value = "";
-            option.textContent = "Tidak ada jam tersedia untuk hari ini";
-            option.disabled = true;
-            waktuInput.appendChild(option);
-        }
+        const timeString = hour.toString().padStart(2, '0') + ':00';
+        const option = document.createElement('option');
+        option.value = timeString;
+        option.textContent = timeString;
+        waktuInput.appendChild(option);
     }
+
+    // Kalau tidak ada jam yang bisa dipilih
+    if (waktuInput.options.length === 1) {
+        const option = document.createElement('option');
+        option.value = "";
+        option.textContent = "Tidak ada jam tersedia untuk hari ini";
+        option.disabled = true;
+        waktuInput.appendChild(option);
+    }
+}
+
 
     function updateOperationalHours() {
         const date = new Date(tanggalInput.value);
