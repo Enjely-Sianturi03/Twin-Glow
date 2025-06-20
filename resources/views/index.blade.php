@@ -207,6 +207,7 @@
                                     <select id="waktu" name="waktu" class="form-control" required>
                                         <option value="">Pilih Waktu</option>
                                     </select>
+                                    <div id="operationalHours" style="font-size: 0.9rem; color: #666; margin-top: 4px;"></div>
                                     @error('waktu')
                                         <span class="error">{{ $message }}</span>
                                     @enderror
