@@ -152,10 +152,7 @@ header {
                     <i class="fas fa-star"></i>
                     Twin Glow Salon & Spa 😊 Salon dan Spa langganan mahasiswa/i favoritmu
                 </span>
-                <span class="custom-marquee-item">
-                    <i class="fas fa-gift"></i>
-                    Dapatkan Diskon 20% untuk Booking Online!
-                </span>
+                
                 <span class="custom-marquee-item">
                     <i class="fas fa-clock"></i>
                     Buka Setiap Hari - Senin-Jumat: 09:00-19:00, Sabtu: 09:00-18:00, Minggu: 10:00-16:00
